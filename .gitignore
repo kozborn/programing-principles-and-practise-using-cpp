@@ -30,4 +30,4 @@
 # QT creator files
 *.pro
 *.pro.user
-
+*build*
