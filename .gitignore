@@ -28,6 +28,7 @@
 *.app
 
 # QT creator files
+*.pri
 *.pro
 *.pro.user
 *build*
