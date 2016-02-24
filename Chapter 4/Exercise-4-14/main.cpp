@@ -13,8 +13,9 @@ int main()
          << "you don’t know that method, get on the web and look it up. Write your" << endl
          << "program using this method." << endl << endl;
 
-    int max = 100;
-
+    int max;
+    cout << "Enter number for which you want to find prime numbers." << endl;
+    cin >> max;
     vector <int> primes(max);
     for(int i=2;i <= (int) sqrt(max); ++i){
         for(int k=i; k<max; ++k){
