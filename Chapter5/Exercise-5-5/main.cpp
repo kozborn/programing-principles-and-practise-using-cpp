@@ -21,16 +21,22 @@ int main(){
     double result = 0;
     char c;
     cout << "Type a temperature and conversion type e.g. 100 c (c to k) or 200 k (k to c)" << endl;
-    cin >> temp >> c;
-    switch(c){
-        case 'c':
-            cout << "Celsius to kelvin = " << ctok(temp) << endl;
-            break;
-        case 'k':
-            cout << "Kelvin to celcius = " <<  ktoc(temp) << endl;
-            break;
-        default:
-            error("No idea what calculation you want!");
+    try{
+        cin >> temp >> c;
+        switch(c){
+            case 'c':
+                cout << "Celsius to kelvin = " << ctok(temp) << endl;
+                break;
+            case 'k':
+                cout << "Kelvin to celcius = " <<  ktoc(temp) << endl;
+                break;
+            default:
+                error("No idea what calculation you want!");
+        }
+    } catch (exception &e) {
+        cout << "Error: " << e.what() << endl;
+    } catch (...) {
+        cout << "Unknown error" << endl;
     }
     return 0;
 }

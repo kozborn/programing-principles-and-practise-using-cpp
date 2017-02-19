@@ -14,17 +14,23 @@ int main(){
     double temp = 0;
     double result = 0;
     char c;
-    cout << "Type a temperature and conversion type e.g. 100 c (c to f) or 200 f (f to c) " << endl;
-    cin >> temp >> c;
-    switch(c){
-        case 'c':
-            cout << "Celsius to fahrenheit = " << ctof(temp) << endl;
-            break;
-        case 'f':
-            cout << "Fahrenheit to celsius = " <<  ftoc(temp) << endl;
-            break;
-        default:
-            error("No idea what calculation you want!");
+    try {
+        cout << "Type a temperature and conversion type e.g. 100 c (c to f) or 200 f (f to c) " << endl;
+        cin >> temp >> c;
+        switch(c){
+            case 'c':
+                cout << "Celsius to fahrenheit = " << ctof(temp) << endl;
+                break;
+            case 'f':
+                cout << "Fahrenheit to celsius = " <<  ftoc(temp) << endl;
+                break;
+            default:
+                error("No idea what calculation you want!");
+        }
+    } catch(exception& e){
+        cout << "Error: " << e.what() << endl;
+    } catch(...) {
+        cout << "Unknown error" << endl;
     }
     return 0;
 }
