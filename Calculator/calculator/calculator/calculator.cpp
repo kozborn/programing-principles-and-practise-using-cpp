@@ -4,6 +4,8 @@
 #include "stdafx.h"
 #include "../../../std_lib_facilities.h"
 
+const float VERSION = 0.1;
+
 //
 // This is example code from Chapter 6.6 "Trying the first version" of
 // "Software - Principles and Practice using C++" by Bjarne Stroustrup
@@ -44,8 +46,8 @@ Token Token_stream::get(){
 	cin >> ch; // be carefull >> it will avoid white spaces, new lines, tabs etc.
 
 	switch (ch){
-	case ';': //print
-	case 'k': //end
+	case '=': //print
+	case 'x': //end
 	case '(':
 	case ')':
 	case '+':
@@ -118,27 +120,30 @@ double primary()     // read and evaluate a Primary
 
 
 int main(){
-
+	cout << "Hello in calculator v" << VERSION << endl;
+	cout << "You can use floating point numbers and operations:" << endl;
+	cout  << "'+', '-', '/', '*', '(', ')'" << endl;
+	cout << "Finish your expression with '=' to calculate or enter 'x' to exit program" << endl;
 	double val = 0;
 	try {
 		while (cin){
 			Token t = ts.get();
-			if (t.kind == 'k') break;
-			if (t.kind == ';') cout << "=" << val << endl;
+			if (t.kind == 'x') break;
+			if (t.kind == '=') cout << "=" << val << endl;
 			else
 				ts.putback(t);
 			val = expression();
 		}
-		keep_window_open("q");
+		keep_window_open("x");
 	}
 	catch (exception& e) {
 		cerr << e.what() << endl;
-		keep_window_open("q");
+		keep_window_open("x");
 		return 1;
 	}
 	catch (...) {
 		cerr << "exception \n";
-		keep_window_open("q");
+		keep_window_open("x");
 		return 2;
 	}
 }
