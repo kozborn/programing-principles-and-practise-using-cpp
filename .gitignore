@@ -35,5 +35,10 @@
 
 # Visual Studio Code
 Code
-.settings
-.vscode
+*.settings
+*.vscode
+
+*.opensdf
+*.sln
+ipch/
+Debug/
