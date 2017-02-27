@@ -5,7 +5,12 @@
 #include "../../../std_lib_facilities.h"
 
 const float VERSION = 0.1;
+const char number = '8';
+const char quit = 'q';
+const char print = ';';
 
+const string prompt = "> ";
+const string result = "= ";
 //
 // This is example code from Chapter 6.6 "Trying the first version" of
 // "Software - Principles and Practice using C++" by Bjarne Stroustrup
@@ -46,8 +51,8 @@ Token Token_stream::get(){
 	cin >> ch; // be carefull >> it will avoid white spaces, new lines, tabs etc.
 
 	switch (ch){
-	case '=': //print
-	case 'x': //end
+	case print: //print
+	case quit: //end
 	case '(':
 	case ')':
 	case '+':
@@ -71,7 +76,7 @@ Token Token_stream::get(){
 		cin.putback(ch);
 		double val;
 		cin >> val;
-		return Token('8', val);
+		return Token(number, val);
 	}
 	default: 
 		error("Bad Token");
@@ -109,43 +114,56 @@ double primary()     // read and evaluate a Primary
 		if (t.kind != ')') error("')' expected");
 		return d;
 	}
-	case '8':            // we use '8' to represent a number
+	case number:            // we use '8' to represent a number
 		return t.value;  // return the number's value
+	case '-':
+		return -primary();
+	case '+':
+		return primary();
 	default:
 		error("primary expected");
 	}
 }
 //------------------------------------------------------------------------------
 
-
+void calculate();
 
 int main(){
 	cout << "Hello in calculator v" << VERSION << endl;
 	cout << "You can use floating point numbers and operations:" << endl;
 	cout  << "'+', '-', '/', '*', '(', ')'" << endl;
-	cout << "Finish your expression with '=' to calculate or enter 'x' to exit program" << endl;
+	cout << "Finish your expression with ';' to calculate or enter 'q' to exit program" << endl;
 	double val = 0;
 	try {
-		while (cin){
-			Token t = ts.get();
-			if (t.kind == 'x') break;
-			if (t.kind == '=') cout << "=" << val << endl;
-			else
-				ts.putback(t);
-			val = expression();
-		}
-		keep_window_open("x");
+		calculate();
 	}
 	catch (exception& e) {
 		cerr << e.what() << endl;
-		keep_window_open("x");
+		keep_window_open("q");
 		return 1;
 	}
 	catch (...) {
 		cerr << "exception \n";
-		keep_window_open("x");
+		keep_window_open("q");
 		return 2;
 	}
+}
+
+//------------------------------------------------------------------------------
+void calculate(){
+	while (cin){
+		cout << prompt;
+		Token t = ts.get();
+		while (t.kind == print) t = ts.get();
+		if (t.kind == quit){
+			keep_window_open("q");
+			return;
+		}
+
+		ts.putback(t);
+		cout << result << expression() << endl;
+	}
+	keep_window_open("q");
 }
 
 //------------------------------------------------------------------------------
@@ -189,6 +207,18 @@ double term()
 			double d = primary();
 			if (d == 0) error("divide by zero");
 			left /= d;
+			t = ts.get();
+			break;
+		}
+		case '%':
+		{
+			double d = primary();
+			int i1 = int(left);
+			if (i1 != left) error("Left argument of '%' operator is not a integer");
+			int i2 = int(d);
+			if (i2 != d) error("Right argument of '%' operator is not a integer");
+			if (i2 == 0) error("Divive by 0");
+			left = i1%i2;
 			t = ts.get();
 			break;
 		}
