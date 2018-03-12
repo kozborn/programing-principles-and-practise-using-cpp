@@ -1,4 +1,5 @@
 #include "../../std_lib_facilities.h"
+#include <algorithm>
 
 vector<int> buildUserNumbers(const int user_number) {
   vector<int> temp (4);
@@ -8,6 +9,30 @@ vector<int> buildUserNumbers(const int user_number) {
   temp[3] = user_number % 10;
   return temp;
 }
+
+int count_bulls(const vector<int> &user_numbers, const vector<int> &numbers) {
+  int count = 0;
+  for(int i = 0; i < user_numbers.size(); ++i) {
+    if (user_numbers.at(i) == numbers.at(i)) {
+      ++count;
+    }
+  }
+  return count;
+}
+
+int count_cows(vector<int> user_numbers, vector<int> numbers) {
+  int count = 0;
+
+  vector<int>::iterator iter;
+  for (int i = 0; i < user_numbers.size(); ++i) {
+    iter = find(numbers.begin(), numbers.end(), user_numbers.at(i));
+    if (iter != numbers.end()) {
+      ++count;
+    }
+  }
+  return count;
+}
+
 
 int main(){
 
@@ -26,9 +51,9 @@ int main(){
         }
         else {
           user_numbers = buildUserNumbers(user_number);
-          for(int i=0; i< user_numbers.size(); ++i){
-            cout << user_numbers.at(i) << endl;
-          }
+          bulls = count_bulls(user_numbers, numbers);
+          cows = count_cows(user_numbers, numbers);
+          cout << bulls << " bull and " << cows << " cows" << endl;
         }
         cout << "Please provide four numbers (q to quit)"  << endl;
       }
