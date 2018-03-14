@@ -11,8 +11,10 @@ typedef struct
 int count_bulls(const vector<int> &user_numbers, vector<Number> &numbers)
 {
   int count = 0;
-  for(int i = 0; i < user_numbers.size(); ++i) {
-    if (user_numbers.at(i) == numbers.at(i).value) {
+  for (int i = 0; i < user_numbers.size(); ++i)
+  {
+    if (user_numbers.at(i) == numbers.at(i).value)
+    {
       ++count;
       numbers.at(i).checked = true;
     }
@@ -20,13 +22,17 @@ int count_bulls(const vector<int> &user_numbers, vector<Number> &numbers)
   return count;
 }
 
-int count_cows(const vector<int> user_numbers, vector<Number> &numbers) {
+int count_cows(const vector<int> user_numbers, vector<Number> &numbers)
+{
   int count = 0;
 
   vector<Number>::iterator iter;
-  for (int i = 0; i < user_numbers.size(); ++i) {
-    for (int j = 0; j < numbers.size(); ++j) {
-      if(numbers.at(j).value == user_numbers.at(i) && !numbers.at(j).checked) {
+  for (int i = 0; i < user_numbers.size(); ++i)
+  {
+    for (int j = 0; j < numbers.size(); ++j)
+    {
+      if (numbers.at(j).value == user_numbers.at(i) && !numbers.at(j).checked)
+      {
         count++;
       }
     }
@@ -34,14 +40,14 @@ int count_cows(const vector<int> user_numbers, vector<Number> &numbers) {
   return count;
 }
 
-int main(){
+int main()
+{
 
   vector<Number> numbers = {
-    {false, 1},
-    {false, 2},
-    {false, 3},
-    {false, 4}
-  };
+      {false, 1},
+      {false, 2},
+      {false, 3},
+      {false, 4}};
 
   vector<int> user_numbers;
   string user_number;
@@ -54,7 +60,8 @@ int main(){
   {
     cout << "Please provide four numbers (q to quit)" << endl;
     cin >> user_number;
-    for(int i = 0; i < user_number.length(); ++i) {
+    for (int i = 0; i < user_number.length(); ++i)
+    {
       user_numbers.push_back(static_cast<int>(user_number[i] - '0'));
     }
 
@@ -72,12 +79,16 @@ int main(){
         cout << "Congratulations, You have won!!!" << endl;
       }
     }
-  } catch(exception &e){
-      cerr << "Error: " << e.what() << endl;
-      return 1;
-  } catch(...) {
-      cerr << "Unknown error" << endl;
-      return 2;
+  }
+  catch (exception &e)
+  {
+    cerr << "Error: " << e.what() << endl;
+    return 1;
+  }
+  catch (...)
+  {
+    cerr << "Unknown error" << endl;
+    return 2;
   }
   return 0;
 }
