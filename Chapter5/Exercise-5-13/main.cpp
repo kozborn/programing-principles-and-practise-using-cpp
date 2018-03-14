@@ -65,7 +65,7 @@ int main()
       user_numbers.push_back(static_cast<int>(user_number[i] - '0'));
     }
 
-    if (user_numbers.size() != 4)
+    if (user_numbers.size() != SIZE)
     {
       cout << "Please provide exactly 4 digits not " << user_numbers.size() << endl;
     }
