@@ -1,7 +1,9 @@
+// Add possibility to use '{' '}'
+
 #include "../../std_lib_facilities.h"
 
 class Token {
-  public: 
+  public:
   char kind;
   double value;
   Token(char ch) :kind(ch), value(0) {}
@@ -55,6 +57,8 @@ Token Token_stream::get()
   case 'q': // for "quit"
   case '(':
   case ')':
+  case '{': // possibility to use { and }
+  case '}':
   case '+':
   case '-':
   case '*':
@@ -132,6 +136,13 @@ double primary()
     t = ts.get();
     if (t.kind != ')') error("')' expected");
       return d;
+  }
+  case '{': // handle '{' primary '}'
+  {
+    double p = expression();
+    t = ts.get();
+    if (t.kind != '}') error("'}' expected");
+      return p;
   }
   case '8':         // we use '8' to represent a number
     return t.value; // return the number's value
