@@ -24,7 +24,15 @@ int Fibonacci() {
 }
 
 int main() {
-  cout << "Maximum int: " << std::numeric_limits<int>::max() << endl;
-  cout << " << " << Fibonacci() << endl;
+  try{
+    cout << "Maximum int: " << std::numeric_limits<int>::max() << endl;
+    cout << " << " << Fibonacci() << endl;
+  } catch (range_error &e) {
+    cout << e.what() << endl;
+    return 1;
+  } catch(...) {
+    cout << "Something is fucked up" << endl;
+    return 2;
+  }
   return 0;
 }
