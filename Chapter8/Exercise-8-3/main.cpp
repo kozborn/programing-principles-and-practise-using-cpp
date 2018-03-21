@@ -3,8 +3,8 @@
 using std::cout;
 using std::endl;
 
-void Fibonacci(int x, int y, vector<int> &v, int n) { 
-  if (n < 2) 
+void Fibonacci(int x, int y, vector<int> &v, int n) {
+  if (n < 2)
     error("How should I calculate fibonacci with less than 2 values?");
   v.push_back(x);
   v.push_back(y);
@@ -26,6 +26,8 @@ int main() {
   int start;
   int stop;
   int count;
+  cout << "This is simple program for displaying fibonacci sequence" << endl;
+  cout << "meaning next number is calculated as a sum of two preceeding numbers" << endl;
   cout << "Enter first second and iteration count " << endl;
   cin >> start >> stop >> count;
   Fibonacci(start, stop, t, count);
