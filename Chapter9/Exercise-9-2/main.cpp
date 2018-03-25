@@ -39,9 +39,8 @@ void NamePairs::sort() {
   vector<string> namesUnSorted = names;
   vector<int> agesUnSorted = ages;
   std::sort(names.begin(), names.end());
-  vector<string>::const_iterator pos;
   for(int i = 0; i < names.size(); ++i) {
-    pos = std::find(namesUnSorted.begin(), namesUnSorted.end(), names.at(i));
+    size_t pos = find(namesUnSorted.begin(), namesUnSorted.end(), names.at(i));
     ages.at(i) = agesUnSorted.at(pos);
   }
 }
