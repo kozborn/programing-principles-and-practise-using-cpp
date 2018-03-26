@@ -40,14 +40,14 @@ void NamePairs::sort() {
   vector<int> agesUnSorted = ages;
   std::sort(names.begin(), names.end());
   for(int i = 0; i < names.size(); ++i) {
-    size_t pos = find(namesUnSorted.begin(), namesUnSorted.end(), names.at(i));
+    size_t pos = find(namesUnSorted.begin(), namesUnSorted.end(), names.at(i)) - namesUnSorted.begin();
     ages.at(i) = agesUnSorted.at(pos);
   }
 }
 
 void NamePairs::print() {
   for(int i = 0; i < names.size(); ++i) {
-    cout << i+1 << " " << names[i] << endl;
+    cout << i+1 << " " << names[i] << ": " << ages[i] << endl;
   }
 }
 
@@ -56,6 +56,8 @@ int main() {
   NamePairs np;
   np.read_names();
   np.read_ages();
+  np.print();
+  np.sort();
   np.print();
   return 0;
 }
