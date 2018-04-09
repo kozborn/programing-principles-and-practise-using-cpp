@@ -252,4 +252,10 @@ Iterator<C> find_if(C& c, Pred p)
         return std::find_if(c.begin(), c.end(), p);
 }
 
+inline ios_base &general(ios_base &b)
+{
+        b.setf(ios_base::fmtflags(0), ios_base::floatfield);
+        return b;
+}
+
 #endif //H112
