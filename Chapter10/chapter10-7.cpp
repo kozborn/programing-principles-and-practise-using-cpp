@@ -4,11 +4,28 @@ void skip_to_int() {
   if (cin.fail())
   {
     cin.clear();
-    cout << "To nie była liczba" << endl;
     char ch;
     while (cin >> ch && !isdigit(ch));
     if (!cin) error("Brak danych");
     cin.unget();
+  }
+}
+
+int get_int() {
+  int n = 0;
+  while(true) {
+    if(cin >> n) return n;
+    cout << "That was not a number, please try again" << endl;
+    skip_to_int();
+  }
+}
+
+int get_int(int min, int max) {
+  int i = 0;
+  while(true) {
+    i = get_int();
+    if(min <= i && i <= max) return i;
+    cout << "Sorry, but " << i << " doesn't belong to [" << min << ", " << max << "]" << endl;
   }
 }
 
@@ -18,17 +35,7 @@ int main() {
     cout << "Provide a number between 1 and 10" << endl;
 
     while(true) {
-      if (cin >> i)
-      {
-        if (1 > i || i > 10)
-        {
-          cout << "Sorry but " << i << " doesn't belong to [1,10]" << endl;
-        } else {
-          cout << "Ok" << endl;
-        }
-      } else {
-        skip_to_int(); 
-      }
+      i = get_int(1, 10);
     }
   } catch(...) {
     cerr << "Something went wrong" << endl;
