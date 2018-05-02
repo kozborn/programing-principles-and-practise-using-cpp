@@ -7,27 +7,27 @@ FLTK = fltk-config --ldflags
 
 all : $(OBJS)
 	$(CC) $(CPPFLAGS) -o $(PROG) $(OBJS) `$(FLTK)`
+	
+run :
+	./$(PROG)
 
-recompile: main.cpp
+compile: main.cpp
 	$(CC) $(CPPFLAGS) -o $(PROG) main.cpp $(WITHOUT_MAIN) `$(FLTK)`
 
-main.o:
+main.o: main.cpp
 	$(CC) -c $(CPPFLAGS) main.cpp
 
-GUI.o:
+GUI.o: ../../GUI.cpp ../../GUI.h
 	$(CC) -c $(CPPFLAGS) ../../GUI.cpp
 
-Graph.o:
+Graph.o: ../../Graph.cpp ../../Graph.h
 	$(CC) -c $(CPPFLAGS) ../../Graph.cpp
 
-Simple_window.o:
+Simple_window.o: ../../Simple_window.cpp ../../Simple_window.h
 	$(CC) -c $(CPPFLAGS) ../../Simple_window.cpp
 
-Window.o:
+Window.o: ../../Window.cpp ../../Window.h
 	$(CC) -c $(CPPFLAGS) ../../Window.cpp
-
-fltk:
-	fltk-config --ldflags
 
 clean:
 	 rm -f $(OBJS) $(PROG)
