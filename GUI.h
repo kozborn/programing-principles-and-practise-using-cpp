@@ -110,10 +110,9 @@ struct Menu : Widget
     horizontal,
     vertical
   };
-  Menu(Point xy, int w, int h, Kind kk, const string &label)
-      : Widget(xy, w, h, label, 0), k(kk), offset(0)
-  {
-  }
+  Menu(Point xy, int w, int h, Kind kk, const string &label);
+  /*    : Widget(xy,w,h,label,0), k(kk), offset(0)
+        {}*/
 
   Vector_ref<Button> selection;
   Kind k;

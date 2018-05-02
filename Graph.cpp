@@ -353,10 +353,10 @@ Image::Image(Point xy, string s, Suffix::Encoding e)
   switch (e)
   {
   case Suffix::jpg:
-    p = new Fl_JPEG_Image(s.c_str());
+    // p = new Fl_JPEG_Image(s.c_str());
     break;
   case Suffix::gif:
-    p = new Fl_GIF_Image(s.c_str());
+    // p = new Fl_GIF_Image(s.c_str());
     break;
     //	case Suffix::bmp:
     //		p = new Fl_BMP_Image(s.c_str());
